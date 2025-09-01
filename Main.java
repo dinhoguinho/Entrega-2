@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
-
+    // Classe responsável por ler números de um arquivo
     private static List<Integer> lerNumeros(String arquivo) throws IOException {
         List<Integer> numeros = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
@@ -11,13 +11,13 @@ public class Main {
             while ((linha = br.readLine()) != null) {
                 linha = linha.trim();
                 if (!linha.isEmpty()) {
-                    numeros.add(Integer.parseInt(linha));
+                    numeros.add(Integer.parseInt(linha)); // Adiciona o número à lista
                 }
             }
         }
         return numeros;
     }
-
+    // Classe responsável por verificar se um número é primo em paralelo
     private static void escreverPrimos(String arquivo, List<Integer> numeros, boolean[] resultados) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
             for (int i = 0; i < numeros.size(); i++) {
@@ -37,7 +37,7 @@ public class Main {
         }
     }
 
-
+    // Método para executar o teste com nThreads e retornar o tempo de execução
     private static long executarTeste(List<Integer> numeros, int nThreads, boolean[] resultados) throws InterruptedException {
         ReentrantLock lock = new ReentrantLock();
         List<Thread> threads = new ArrayList<>();
